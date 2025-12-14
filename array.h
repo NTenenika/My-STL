@@ -54,6 +54,12 @@ class Array {
       }
       Set(rest...);
     }
+    T& operator[](auto index) {
+      return array_[index];
+    }
+    const T& operator[](auto index) const {
+      return array_[index];
+    }
 
     size_t GetSize() const {
       return size_;
