@@ -16,6 +16,12 @@ class Node {
       }
       return this;
     }
+    void SetNext(Node* next) {
+      next_ = next;
+    }
+    Node* Next() {
+      return next_;
+    }
 
   private:
     Node* next_;
@@ -25,11 +31,21 @@ class Node {
 template<class Data>
 class LinkedList {
   public:
-    LinkedList() : head_(nullptr), current_(nullptr), tail_(nullptr) {}
+    LinkedList() : head_(nullptr), current_(Node{}), tail_(Node{}) {}
     ~LinkedList() {
+      current_->SetNext(head_); // This sets current's ptr to head
+      if (current->Next() == nullptr) {
+        return;
+      }
+      do {
+        Node* next_node(current->Next());
+        delete current_;
+        current_->SetNext(next_node);
+      } while(current != nullptr)
+      head_ = nullptr;
     }
   private:
     Node* head_;
-    Node* current_;
-    Node* tail_;
+    Node current_;
+    Node tail_;
 };
