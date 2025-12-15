@@ -10,7 +10,12 @@ class Node {
     Node(Node* next, Data&& value) : next_(next), value_(value) {}
     ~Node() {}
 
-
+    Node* operator=(const Node* other) {
+      if (this != other) {
+        this = other;
+      }
+      return this;
+    }
 
   private:
     Node* next_;
@@ -20,8 +25,11 @@ class Node {
 template<class Data>
 class LinkedList {
   public:
-    LinkedList() : head_(nullptr), tail_(nullptr) {}
+    LinkedList() : head_(nullptr), current_(nullptr), tail_(nullptr) {}
+    ~LinkedList() {
+    }
   private:
     Node* head_;
+    Node* current_;
     Node* tail_;
 };
